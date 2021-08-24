@@ -1,0 +1,89 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    --main-color: #dc4c3f;
+    --sec-color: #faffff;
+    --brd-color: #e7e7e7;
+}
+h2, h3 {
+    font-weight: normal;
+    font-style: normal;
+    font-weight: 500;
+}
+.wrapper{
+    display: flex;
+}
+/* --------------------- HEADER DESIGN --------------------- */
+header{
+    background-color: var(--main-color);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+#headerLogo{
+    font-family: 'Material Icons';
+    font-style: normal;
+    margin-left: 50px;
+    font-size: 30px;
+    color: var(--sec-color);
+}
+#headerText{
+    color: white;
+    font-size: 20px;
+}
+/* --------------------- SIDEBAR DESIGN --------------------- */
+.sidebar{
+    min-height: 500px;
+    width: 280px;
+    border-right: 1px solid var(--brd-color);
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+    padding-top: 30px;
+    font-size: 17px;
+    display: inline-block;
+}
+#sidebarProjects{
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+#sidebarInbox{
+    margin-bottom: 10px;
+}
+#sidebarToday{
+    margin-bottom: 10px;
+}
+/* --------------------- MAIN DESIGN --------------------- */ 
+.main{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 500px;
+    width: 1000px;
+    margin-left: 60px;
+    
+}
+#mainHeader{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.todo{
+    height: 30px;
+    width: 1000px;
+    border-bottom: 1px solid var(--brd-color);
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+#deleteLogo{
+    font-family: 'Material Icons';
+    font-style: normal;
+    margin-left: 100px;
+}
+li{
+    list-style-type: none;
+    display: inline-block;
+}
