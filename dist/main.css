@@ -62,7 +62,7 @@ header{
     flex-direction: column;
     position: relative;
     min-height: 500px;
-    width: 1000px;
+    width: 1500px;
     margin-left: 60px;
     
 }
@@ -76,14 +76,31 @@ header{
     border-bottom: 1px solid var(--brd-color);
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 15px;
 }
 #deleteLogo{
     font-family: 'Material Icons';
     font-style: normal;
-    margin-left: 100px;
 }
-li{
-    list-style-type: none;
-    display: inline-block;
+#addTodoBtn{
+    font-size: 20px;
+}
+.addTodoForm{
+    display: none;
+    margin-bottom: 20px;
+}
+.addTodoInput{
+    padding: 8px;
+    margin-right: 10px;
+}
+.active{
+    display: initial;
+}
+#priorityInput{
+    padding: 7px;
+    margin-right: 10px;
+}
+#enterAddTodoBtn{
+    padding: 7px;
 }

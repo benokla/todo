@@ -29,28 +29,27 @@
 
         <div class="main">
             <h2 id="mainHeader">Inbox</h2>
-            <ul>
-                <div class="todo">
-                    <li>14 Uhr mir Losia trefen</li>
+            <div class="addTodoForm">
+                <input type="text" class="addTodoInput" name="title" id="titleInput" placeholder="Title*">
+                <input type="text" class="addTodoInput" name="description" id="descriptionInput" placeholder="Description">
+                <input type="text" class="addTodoInput" name="duedate" id="duedateInput" placeholder="Due date">
+                <input type="text" class="addTodoInput" name="project" id="projectInput" placeholder="Project">
+                <select name="priority" id="priorityInput">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <input id="enterAddTodoBtn" type="button" value="Add">
+            </div>
+            <ul id="todoContainer">
+                <!-- <div class="todo">
+                    <p>14 Uhr mir Losia trefen</p>
                     <span id="deleteLogo" class="material-icons-outlined">
                         remove_circle_outline
                     </span>
-                </div>
-
-                <div class="todo">
-                    <li>14 Uhr mir Losia trefen</li>
-                    <span id="deleteLogo" class="material-icons-outlined">
-                        remove_circle_outline
-                    </span>
-                </div>
-
-                <div class="todo">
-                    <li>14 Uhr mir Losia trefen</li>
-                    <span id="deleteLogo" class="material-icons-outlined">
-                        remove_circle_outline
-                    </span>
-                </div>
+                </div> -->
             </ul>
+            <h2 id="addTodoBtn">+ Add todo</h2>
         </div>
     </div>
     <script src="main.js"></script>
