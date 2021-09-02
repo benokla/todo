@@ -52,9 +52,14 @@ header{
 }
 #sidebarInbox{
     margin-bottom: 10px;
+    cursor: pointer;
 }
 #sidebarToday{
     margin-bottom: 10px;
+    cursor: pointer;
+}
+#sidebarWeek{
+    cursor: pointer;
 }
 /* --------------------- MAIN DESIGN --------------------- */ 
 .main{
@@ -79,7 +84,7 @@ header{
     justify-content: space-between;
     margin-bottom: 15px;
 }
-#deleteLogo{
+#deleteBtn{
     font-family: 'Material Icons';
     font-style: normal;
 }
