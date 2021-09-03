@@ -87,6 +87,7 @@ header{
 #deleteBtn{
     font-family: 'Material Icons';
     font-style: normal;
+    cursor: pointer;
 }
 #addTodoBtn{
     font-size: 20px;

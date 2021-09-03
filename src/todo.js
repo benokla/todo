@@ -15,7 +15,7 @@ const todoModule = (() => {
     }
 
     let todo1 = new Todo("Todo1Title", "Descrpi1", "2022-09-01", "high", "project11");
-    let todo2 = new Todo("Taodo1Title", "Descrpi1", "2021-09-02", "high", "project11");
+    let todo2 = new Todo("Taodo1Title", "Descrpi1", "2021-09-03", "high", "project11");
     todo1.pushToArray(todos)
     todo2.pushToArray(todos)
 
@@ -26,12 +26,11 @@ const todoModule = (() => {
     }
     
     function deleteTodo(e) {
-        todos = todos.filter((todo) => {
-            if(e.target.parentNode.childNodes[0].textContent !== `${todo.title}: ${todo.description}`){
-                return todo;
+        for(let i = 0; i<todos.length; i++){
+            if(e.target.parentNode.childNodes[0].textContent == `${todos[i].title} - Due: ${todos[i].duedate}`){
+                todos.splice(i,1)
             }
-        })
-        console.log(todos)
+        }        
     }
 
     return {todos, addTodo, deleteTodo}

@@ -40,8 +40,7 @@ const displayController = (() => {
         todos.forEach(element => {
             showTodos(element)
         });
-
-        deleteEvent("Inbox")
+        deleteEvent("Inbox");
     }
 
     const loadToday = (todos) => {
@@ -52,6 +51,7 @@ const displayController = (() => {
                 showTodos(element)
             }
         });
+        deleteEvent("Today");
     }
 
     const loadThisWeek = (todos) => {
@@ -63,6 +63,7 @@ const displayController = (() => {
                 showTodos(element)
             }
         })
+        deleteEvent("Week");
     }
 
     const showTodos = (element) => {
@@ -71,7 +72,7 @@ const displayController = (() => {
 
         const todoText = document.createElement("p");
         todoText.setAttribute("id", "todoText");
-        todoText.textContent = element.title + ": " + element.description;          
+        todoText.textContent = element.title + " - Due: " + element.duedate;          
 
         const deleteLogo = document.createElement("span");
         deleteLogo.setAttribute("id", "deleteBtn");
@@ -83,23 +84,24 @@ const displayController = (() => {
         todoContainer.appendChild(todo);
     }
 
-    const deleteEvent = (category) => {
+    const deleteEvent = (origin) => {
         const deleteBtns = document.querySelectorAll("#deleteBtn");
 
         deleteBtns.forEach(element => {
             element.addEventListener("click", (e) => {
                 todoModule.deleteTodo(e);
+
+                if(origin == "Inbox") {
+                    loadInbox(todoModule.todos)
+                } else if(origin == "Today"){
+                    loadToday(todoModule.todos)
+                } else if(origin == "Week"){
+                    loadThisWeek(todoModule.todos)
+                }
             })
         });
-
-        if(category == "Inbox"){
-            loadInbox(todoModule.todos)
-        } else if (category == "Today"){
-            loadToday(todoModule.todos)
-        } else if (category = "Week"){
-            loadThisWeek(todoModule.todos)
-        }
     }
+
 
     addTodoBtn.addEventListener("click", addTodo);
     newTodoBtn.addEventListener("click", openAddTodoForm);
@@ -107,7 +109,7 @@ const displayController = (() => {
     today.addEventListener("click", () => { loadToday(todoModule.todos) })
     week.addEventListener("click", () => { loadThisWeek(todoModule.todos) })
 
-    return { loadInbox }
+    return { loadInbox, deleteEvent }
 
 })();
 
