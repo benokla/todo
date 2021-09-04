@@ -100,13 +100,19 @@ header{
     padding: 8px;
     margin-right: 10px;
 }
-.active{
-    display: initial;
-}
+
 #priorityInput{
     padding: 7px;
     margin-right: 10px;
 }
 #enterAddTodoBtn{
     padding: 7px;
+}
+/* expanded todo */
+.expandTodo{
+    display: none;
+}
+
+.active{
+    display: initial;
 }
