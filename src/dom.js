@@ -41,6 +41,7 @@ const displayController = (() => {
             showTodos(element)
         });
         deleteEvent("Inbox");
+        expandTodoEvent()
     }
 
     const loadToday = (todos) => {
@@ -52,6 +53,7 @@ const displayController = (() => {
             }
         });
         deleteEvent("Today");
+        expandTodoEvent()
     }
 
     const loadThisWeek = (todos) => {
@@ -64,6 +66,7 @@ const displayController = (() => {
             }
         })
         deleteEvent("Week");
+        expandTodoEvent()
     }
 
     const showTodos = (element) => {
@@ -102,6 +105,24 @@ const displayController = (() => {
         });
     }
 
+    const expandTodoEvent = () => {
+        const todos = document.querySelectorAll(".todo");
+        todos.forEach(element => {
+            element.addEventListener("click", (e) => {
+                const expandTodo = document.querySelector(".expandTodo");
+                expandTodo.classList.add("active")
+
+                const expandTitleInput = document.querySelector("#expandTitleInput");
+                const expandDescriptionInput = document.querySelector("#expandDescriptionInput");
+                const expandDuedateInput = document.querySelector("#expandDuedateInput");
+                const expandProjectInput = document.querySelector("#expandProjectInput");
+                const expandPriorityInput = document.querySelector("#expandPriorityInput");
+
+                console.log(e.target)
+
+            })
+        });
+    }
 
     addTodoBtn.addEventListener("click", addTodo);
     newTodoBtn.addEventListener("click", openAddTodoForm);
@@ -109,7 +130,7 @@ const displayController = (() => {
     today.addEventListener("click", () => { loadToday(todoModule.todos) })
     week.addEventListener("click", () => { loadThisWeek(todoModule.todos) })
 
-    return { loadInbox, deleteEvent }
+    return { loadInbox }
 
 })();
 
