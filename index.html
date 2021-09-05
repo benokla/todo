@@ -10,11 +10,14 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
+
     <header id="header">
         <span id="headerLogo" class="material-icons-outlined">polymere</span>
         <p id="headerText">Todo-List</p>
     </header>
+
     <div class="wrapper">
+
         <div class="sidebar">
             <h3 id="sidebarInbox">Inbox</h3>
             <h3 id="sidebarToday">Today</h3>
@@ -29,7 +32,7 @@
             <div class="addTodoForm">
                 <input type="text" class="addTodoInput" name="title" id="titleInput" placeholder="Title*">
                 <input type="text" class="addTodoInput" name="description" id="descriptionInput" placeholder="Description">
-                <input type="date" class="addTodoInput" name="duedate" id="duedateInput" placeholder="Due date">
+                <input type="date" class="addTodoInput" name="duedate" id="dueDateInput" placeholder="Due date">
                 <input type="text" class="addTodoInput" name="project" id="projectInput" placeholder="Project">
                 <select name="priority" id="priorityInput">
                     <option value="low">Low</option>
@@ -38,10 +41,11 @@
                 </select>
                 <input id="enterAddTodoBtn" type="button" value="Add">
             </div>
+
             <div class="expandTodo">
                 <input type="text" class="addTodoInput" name="title" id="expandTitleInput">
                 <input type="text" class="addTodoInput" name="description" id="expandDescriptionInput">
-                <input type="date" class="addTodoInput" name="duedate" id="expandDuedateInput">
+                <input type="date" class="addTodoInput" name="duedate" id="expandDueDateInput">
                 <input type="text" class="addTodoInput" name="project" id="expandProjectInput">
                 <select name="priority" id="expandPriorityInput">
                     <option value="low">Low</option>
@@ -50,6 +54,7 @@
                 </select>
                 <input id="enterAddTodoBtn" type="button" value="Add">
             </div>
+
             <ul id="todoContainer">
                 <!-- <div class="todo">
                     <p>14 Uhr mir Losia trefen</p>
@@ -58,7 +63,8 @@
                     </span>
                 </div> -->
             </ul>
-            <h2 id="addTodoBtn">+ Add todo</h2>
+            <div class="addTodoBtnContainer"></div>
+            <!-- <h2 id="addTodoBtn">+ Add todo</h2> -->
         </div>
     </div>
     <script src="main.js"></script>

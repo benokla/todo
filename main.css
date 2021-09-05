@@ -91,6 +91,7 @@ header{
 }
 #addTodoBtn{
     font-size: 20px;
+    cursor: pointer;
 }
 .addTodoForm{
     display: none;
