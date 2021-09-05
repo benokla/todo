@@ -1,137 +1,123 @@
-import { todoModule } from "./todo";
-import isToday from 'date-fns/isToday';
-import isThisWeek from 'date-fns/isThisWeek';
+import { todo } from "./todo"
+import isThisWeek from 'date-fns/isThisWeek'
+import isToday from 'date-fns/isToday'
 
-const displayController = (() => {
-    // SIDEBAR
-    const inbox = document.querySelector("#sidebarInbox");
-    const today = document.querySelector("#sidebarToday");
-    const week = document.querySelector("#sidebarWeek");
-    const newTodoBtn = document.querySelector("#addTodoBtn");
+const dom = (() => {
+    const mainHeader = document.querySelector("#mainHeader");
+    const addTodoBtnContainer = document.querySelector(".addTodoBtnContainer");
+    let enterAddTodoBtn = document.querySelector("#enterAddTodoBtn");
 
-    // TODO
-    const todoContainer = document.querySelector("#todoContainer");
-    const addTodoBtn = document.querySelector("#enterAddTodoBtn");
     const addTodoForm = document.querySelector(".addTodoForm");
+    const todoContainer = document.querySelector("#todoContainer")
+    // SIDEBAR
+    const sidebarInbox = document.querySelector("#sidebarInbox")
+    const sidebarToday = document.querySelector("#sidebarToday")
+    const sidebarWeek = document.querySelector("#sidebarWeek")
 
-    // MAIN
-    const mainHeader = document.querySelector("#mainHeader")
+    
+    sidebarInbox.addEventListener("click", () => { loadInbox() });
+    sidebarToday.addEventListener("click", () => { loadToday() });
+    sidebarWeek.addEventListener("click", () => { loadWeek() });
 
-    function addTodo() {
-        const titleInput = document.querySelector("#titleInput")
-        const descriptionInput = document.querySelector("#descriptionInput")
-        const duedateInput = document.querySelector("#duedateInput")
-        const projectInput = document.querySelector("#projectInput");
-        const priorityInput = document.querySelector("#priorityInput");
-
-        addTodoForm.classList.remove("active");
-        todoModule.addTodo(titleInput.value, descriptionInput.value, duedateInput.value, projectInput.value, priorityInput.value);
-        loadInbox(todoModule.todos);
-    }
-
-    function openAddTodoForm() {
+    const openAddTodoForm = () => {
         addTodoForm.classList.add("active")
+        enterAddTodoBtn = document.querySelector("#enterAddTodoBtn"); 
     }
 
-    const loadInbox = (todos) => {
+    if(enterAddTodoBtn !== null) {
+        enterAddTodoBtn.addEventListener("click", () => {
+            addTodo();
+            loadInbox();
+            closeAddTodoForm();
+        })   
+    }
+
+    const addTodo = () => {
+        const titleInput = document.querySelector("#titleInput");
+        const descriptionInput = document.querySelector("#descriptionInput");
+        const dueDateInput = document.querySelector("#dueDateInput");
+        const priorityInput = document.querySelector("#priorityInput");
+        const projectInput = document.querySelector("#projectInput");
+        todo.addTodo(titleInput.value, descriptionInput.value, dueDateInput.value, priorityInput.value, projectInput.value)
+    }
+
+    const closeAddTodoForm = () => {
+        addTodoForm.classList.remove("active")
+    }
+
+    const loadInbox = () => {
+        addTodoBtnContainer.innerHTML = "";
         mainHeader.textContent = "Inbox"
-        todoContainer.innerHTML = "";
+        showTodos(todo.todos, "inbox");
 
-        todos.forEach(element => {
-            showTodos(element)
-        });
-        deleteEvent("Inbox");
-        expandTodoEvent()
+        const addTodoBtn = document.createElement("h2");
+        addTodoBtn.textContent = "+ Add Todo";
+        addTodoBtn.setAttribute("id", "addTodoBtn")
+        addTodoBtnContainer.appendChild(addTodoBtn)
+
+        addTodoBtn.addEventListener("click", () => { 
+            openAddTodoForm() 
+        })    
     }
 
-    const loadToday = (todos) => {
+    const loadToday = () => {
         mainHeader.textContent = "Today"
-        todoContainer.innerHTML = "";
+        showTodos(todo.todos, "today")
+    }
+
+    const loadWeek = () => {
+        mainHeader.textContent = "This week"
+        showTodos(todo.todos, "week")
+    }
+
+    const deleteTodo = (e, arg) => {
+        todo.todos = todo.deleteTodo(e);
+
+        if(arg == "week") {
+            loadWeek();
+        } else if(arg == "today"){
+            loadToday();
+        } else {
+            loadInbox();
+        }
+    }
+
+    const showTodos = (todos, arg) => {
+        todoContainer.innerHTML = " "
+
+        if(arg=="week"){
+            todos = todos.filter(todo => { return isThisWeek(new Date(todo.dueDate)) })
+        } else if(arg=="today"){
+            todos = todos.filter(todo => { return isToday(new Date(todo.dueDate)) })
+        }
+
         todos.forEach(element => {
-            if(isToday(new Date(element.duedate))){
-                showTodos(element)
-            }
-        });
-        deleteEvent("Today");
-        expandTodoEvent()
+            const todoDiv = document.createElement("div");
+            todoDiv.classList.add("todo");
+
+            const todoText = document.createElement("p");
+            todoText.textContent = `${element.title} - Due: ${element.dueDate}`
+
+            const deleteBtn = document.createElement("span");
+            deleteBtn.setAttribute("id", "deleteLogo");
+            deleteBtn.classList.add("material-icons");
+            deleteBtn.textContent = "remove_circle_outline";
+
+            todoDiv.appendChild(todoText)
+            todoDiv.appendChild(deleteBtn)
+            todoContainer.appendChild(todoDiv)
+
+            if(deleteBtn !== null) {
+                deleteBtn.addEventListener("click", (e) => { deleteTodo(e, arg) });
+            }  
+        });        
+
     }
 
-    const loadThisWeek = (todos) => {
-        mainHeader.textContent = "This week";
-        todoContainer.innerHTML = "";
+    
 
-        todos.forEach(element => {
-            if(isThisWeek(new Date(element.duedate))){
-                showTodos(element)
-            }
-        })
-        deleteEvent("Week");
-        expandTodoEvent()
-    }
-
-    const showTodos = (element) => {
-        const todo = document.createElement("div");
-        todo.classList.add("todo");
-
-        const todoText = document.createElement("p");
-        todoText.setAttribute("id", "todoText");
-        todoText.textContent = element.title + " - Due: " + element.duedate;          
-
-        const deleteLogo = document.createElement("span");
-        deleteLogo.setAttribute("id", "deleteBtn");
-        deleteLogo.classList.add("material-icons-outlined");
-        deleteLogo.textContent="remove_circle_outline";
-
-        todo.appendChild(todoText);
-        todo.appendChild(deleteLogo);
-        todoContainer.appendChild(todo);
-    }
-
-    const deleteEvent = (origin) => {
-        const deleteBtns = document.querySelectorAll("#deleteBtn");
-
-        deleteBtns.forEach(element => {
-            element.addEventListener("click", (e) => {
-                todoModule.deleteTodo(e);
-
-                if(origin == "Inbox") {
-                    loadInbox(todoModule.todos)
-                } else if(origin == "Today"){
-                    loadToday(todoModule.todos)
-                } else if(origin == "Week"){
-                    loadThisWeek(todoModule.todos)
-                }
-            })
-        });
-    }
-
-    const expandTodoEvent = () => {
-        const todos = document.querySelectorAll(".todo");
-        todos.forEach(element => {
-            element.addEventListener("click", (e) => {
-                const expandTodo = document.querySelector(".expandTodo");
-                expandTodo.classList.add("active")
-
-                const expandTitleInput = document.querySelector("#expandTitleInput");
-                const expandDescriptionInput = document.querySelector("#expandDescriptionInput");
-                const expandDuedateInput = document.querySelector("#expandDuedateInput");
-                const expandProjectInput = document.querySelector("#expandProjectInput");
-                const expandPriorityInput = document.querySelector("#expandPriorityInput");
-
-                console.log(e.target)
-
-            })
-        });
-    }
-
-    addTodoBtn.addEventListener("click", addTodo);
-    newTodoBtn.addEventListener("click", openAddTodoForm);
-    inbox.addEventListener("click", () => { loadInbox(todoModule.todos) })
-    today.addEventListener("click", () => { loadToday(todoModule.todos) })
-    week.addEventListener("click", () => { loadThisWeek(todoModule.todos) })
-
-    return { loadInbox }
+    loadInbox();
 
 })();
 
-export {displayController}
+export { dom }
