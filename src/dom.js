@@ -6,6 +6,7 @@ const dom = (() => {
     const mainHeader = document.querySelector("#mainHeader");
     const addTodoBtnContainer = document.querySelector(".addTodoBtnContainer");
     let enterAddTodoBtn = document.querySelector("#enterAddTodoBtn");
+    const expandTodoDiv = document.querySelector(".expandTodo")
 
     const addTodoForm = document.querySelector(".addTodoForm");
     const todoContainer = document.querySelector("#todoContainer")
@@ -96,6 +97,7 @@ const dom = (() => {
             todoDiv.classList.add("todo");
 
             const todoText = document.createElement("p");
+            todoText.classList.add("todoText")
             todoText.textContent = `${element.title} - Due: ${element.dueDate}`
 
             const deleteBtn = document.createElement("span");
@@ -110,8 +112,48 @@ const dom = (() => {
             if(deleteBtn !== null) {
                 deleteBtn.addEventListener("click", (e) => { deleteTodo(e, arg) });
             }  
-        });        
+        });    
+        
+        expandTodoEvent()
+    }
 
+    const expandTodoEvent = () => {
+        const todos = document.querySelectorAll(".todoText");
+        todos.forEach(todo => {
+            todo.addEventListener("click", (e) => { expandTodo(e)})
+        });
+    }
+
+    const expandTodo = (e) => {
+        let clickedTodoArray = todo.todos.filter((todo) => {
+            if(`${todo.title} - Due: ${todo.dueDate}` == e.target.textContent){
+                return todo;
+            }
+        })
+        let todoTitlesArray = todo.todos.map((todo) => { return todo.title })
+        let pos = todoTitlesArray.indexOf(clickedTodoArray[0].title);
+
+       expandTodoDiv.classList.add("active")
+
+       const expandTitleInput = document.querySelector("#expandTitleInput");
+       const expandDescriptionInput = document.querySelector("#expandDescriptionInput");
+       const expandDueDateInput = document.querySelector("#expandDueDateInput");
+       const expandPriorityInput = document.querySelector("#expandPriorityInput");
+       const expandProjectInput = document.querySelector("#expandProjectInput");
+
+       expandTitleInput.value = todo.todos[pos].title;
+       expandDescriptionInput.value = todo.todos[pos].description;
+       expandDueDateInput.value = todo.todos[pos].dueDate;
+       expandPriorityInput.value = todo.todos[pos].priority;
+       expandProjectInput.value = todo.todos[pos].project;
+
+       let enterUpdateTodoBtn = document.querySelector("#enterUpdateTodoBtn")
+       enterUpdateTodoBtn.addEventListener("click", () => {
+            todo.todos.splice(pos, 1);
+            todo.addTodo(expandTitleInput.value, expandDescriptionInput.value, expandDueDateInput.value, expandPriorityInput.value,  expandProjectInput.value)
+            loadInbox();
+            expandTodoDiv.classList.remove("active")
+    })  
     }
 
     

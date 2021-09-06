@@ -1,12 +1,26 @@
 const todo = (() => {
 
     let todos = [];
+    let i = 1;
 
     const todoFactory = (title, description, dueDate, priority, project) => {
         return {title, description, dueDate, priority, project}
     }
 
     const addTodo = (title, description, dueDate, priority, project) => {
+
+        
+
+        if(title == ""){
+            alert("Title cant be empty.")
+            return;
+        }
+
+        let todoTitlesArray = todos.map((todo) => { return todo.title });
+        if(todoTitlesArray.includes(title)) {
+            title = `${title} (${i++})`
+        }
+
         const todo = todoFactory(title, description, dueDate, priority, project);
         todos.push(todo)
         console.log(todos)
@@ -22,8 +36,8 @@ const todo = (() => {
         return todos;
     }
 
-    addTodo("T1", "D1", "2021-09-05", "P1", "PR1")
-    addTodo("T1", "D1", "2021-09-06", "P1", "PR1")
+    addTodo("T1", "D1", "2021-09-05", "low", "PR1")
+    addTodo("T2", "D1", "2021-09-06", "medium", "PR1")
 
     return { todos, addTodo, deleteTodo}
 })();
