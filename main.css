@@ -2,13 +2,14 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     --main-color: #dc4c3f;
-    --sec-color: #faffff;
+    --sec-color: #e4e7ff;
     --brd-color: #e7e7e7;
 }
 h2, h3 {
-    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 500;
 }
@@ -37,7 +38,7 @@ header{
 /* --------------------- SIDEBAR DESIGN --------------------- */
 .sidebar{
     min-height: 500px;
-    width: 280px;
+    width: 400px;
     border-right: 1px solid var(--brd-color);
     display: flex;
     flex-direction: column;
@@ -48,7 +49,7 @@ header{
 }
 #sidebarProjects{
     margin-top: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 #sidebarInbox{
     margin-bottom: 10px;
@@ -87,6 +88,7 @@ header{
 #deleteBtn{
     font-family: 'Material Icons';
     font-style: normal;
+    font-weight: 300;
     cursor: pointer;
 }
 #addTodoBtn{
@@ -109,11 +111,54 @@ header{
 #enterAddTodoBtn{
     padding: 7px;
 }
+.todoText{
+    cursor: pointer;
+}
+
+#deleteLogo{
+    display: inline-block;
+    cursor: pointer;
+    
+}
 /* expanded todo */
+
 .expandTodo{
     display: none;
 }
 
+/* --------------------- Projects --------------------- */ 
+
+#newProjectInput{
+    margin-bottom: 7px;
+    padding: 5px;
+}
+#enterAddProject{
+    padding: 6px;
+}
+.newProjectWrapper{
+    display: none;
+}
+#addProjectBtn{
+    cursor: pointer;
+}
 .active{
     display: initial;
+}
+#projectTitle{
+    display: inline-block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.projectDiv{
+    width: 350px;
+    position: relative;
+}
+#projectsDeleteLogo{
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+}
+.projectContainer{
+    margin-left: 15px;
 }
