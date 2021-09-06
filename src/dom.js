@@ -156,10 +156,7 @@ const dom = (() => {
     })  
     }
 
-    
-
-    loadInbox();
-
+    return { showTodos, loadInbox }
 })();
 
 export { dom }

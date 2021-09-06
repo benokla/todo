@@ -8,9 +8,6 @@ const todo = (() => {
     }
 
     const addTodo = (title, description, dueDate, priority, project) => {
-
-        
-
         if(title == ""){
             alert("Title cant be empty.")
             return;
@@ -18,7 +15,8 @@ const todo = (() => {
 
         let todoTitlesArray = todos.map((todo) => { return todo.title });
         if(todoTitlesArray.includes(title)) {
-            title = `${title} (${i++})`
+            alert("Title cant be the same.");
+            return;
         }
 
         const todo = todoFactory(title, description, dueDate, priority, project);
@@ -36,8 +34,8 @@ const todo = (() => {
         return todos;
     }
 
-    addTodo("T1", "D1", "2021-09-05", "low", "PR1")
-    addTodo("T2", "D1", "2021-09-06", "medium", "PR1")
+    addTodo("Learn Modular JS", "Modular JS is a key concept", "2021-09-05", "low", "Programming")
+    addTodo("Pet my rabbits", "", "2021-09-06", "medium", "Animals")
 
     return { todos, addTodo, deleteTodo}
 })();
