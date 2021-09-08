@@ -6,6 +6,10 @@ const UI = (() => {
     const addTodoForm = document.querySelector("#addTodoForm")
     const addTodoBtn = document.querySelector("#addTodoBtn")
     const todoContainer = document.querySelector("#todoContainer")
+    const inbox = document.querySelector("#inbox")
+    const today = document.querySelector("#today")
+    const week = document.querySelector("#week")
+    const header = document.querySelector("#header")
 
     // bind events
     openAddTodoFormBtn.addEventListener("click", openAddTodoForm)
@@ -16,6 +20,18 @@ const UI = (() => {
 
     function openAddTodoForm() {
         addTodoForm.classList.add("active");
+    }
+
+    function todoEvent() {
+        const deleteBtns = document.querySelectorAll(".deleteBtn");
+        deleteBtns.forEach(deleteBtn => {
+            deleteBtn.addEventListener("click", (e) => { deleteTodo(e) });
+        });
+    }
+
+    function deleteTodo(e) {
+        todo.deleteTodo(+e.target.parentNode.dataset.index);
+        showTodos()
     }
 
     function closeAddTodoForm() {
@@ -38,6 +54,7 @@ const UI = (() => {
         let todos = todo.getTodos();
         todos.forEach((element) => {
             const todo = document.createElement("div");
+            todo.dataset.index = element.id;
             todo.classList.add("todo")
 
             const todoText = document.createElement("p");
@@ -59,7 +76,13 @@ const UI = (() => {
             todo.appendChild(editBtn)
             todoContainer.appendChild(todo)
         })
+
+        // cache DOM
+        todoEvent();
     }
+
+    todo.addTodo("Title1", "Desc1", "DUedAte1", "medium", "project1", todo.getId())
+    showTodos()
 })();
 
 export { UI }
