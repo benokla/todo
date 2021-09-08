@@ -1,43 +1,33 @@
 const todo = (() => {
 
+    let id = 0;
+
     let todos = [];
-    let i = 1;
 
-    const todoFactory = (title, description, dueDate, priority, project) => {
-        return {title, description, dueDate, priority, project}
+    function Todo(title, description, dueDate, priority, project, id) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.project = project;
+        this.id = id;
     }
 
-    const addTodo = (title, description, dueDate, priority, project) => {
-        if(title == ""){
-            alert("Title cant be empty.")
-            return;
-        }
-
-        let todoTitlesArray = todos.map((todo) => { return todo.title });
-        if(todoTitlesArray.includes(title)) {
-            alert("Title cant be the same.");
-            return;
-        }
-
-        const todo = todoFactory(title, description, dueDate, priority, project);
-        todos.push(todo)
+    function addTodo(title, description, dueDate, priority, project, id) {
+        const todo = new Todo(title, description, dueDate, priority, project, id);
+        todos.push(todo);
         console.log(todos)
     }
 
-    const deleteTodo = (e) => {
-        todos = todos.filter((todo) => {
-            if(`${todo.title} - Due: ${todo.dueDate}` !== e.target.parentNode.childNodes[0].textContent){
-                return todo;
-            }
-        })
-        console.log(todos)
+    function getTodos() {
         return todos;
     }
 
-    addTodo("Learn Modular JS", "Modular JS is a key concept", "2021-09-05", "low", "Programming")
-    addTodo("Pet my rabbits", "", "2021-09-06", "medium", "Animals")
+    function getId() {
+        return id++;
+    }
 
-    return { todos, addTodo, deleteTodo}
+    return { getId, getTodos, addTodo }
 })();
 
-export {todo}
+export { todo }
