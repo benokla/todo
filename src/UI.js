@@ -17,7 +17,7 @@ const UI = (() => {
     const editTodoForm = document.querySelector("#editTodoForm")
     const saveTodoBtn = document.querySelector("#saveTodoBtn")
     const newProjectBtn = document.querySelector("#newProjectBtn")
-    const projectInput = document.querySelector("#projectInput")
+    const projectInput = document.querySelector("#projectsInput")
     const projects = document.querySelector("#projects")
     // cache DOM Edit
     const editTitle = document.querySelector("#editTitleInput");
@@ -58,10 +58,18 @@ const UI = (() => {
         projectTitles.forEach(element => {
             element.addEventListener("click", (e) => { loadProject(e) })
         });
-        const deleteProjectsBtn = document.querySelectorAll("deleteProjectsBtn")
+        const deleteProjectsBtn = document.querySelectorAll(".deleteProjectsBtn")
+        deleteProjectsBtn.forEach(element => {
+            element.addEventListener("click", (e) => { deleteProject(e)})
+        });
     }
 
     // functions 
+
+    function deleteProject(e) {
+        project.deleteProject(project.getProject(e.target.parentNode.dataset.index))
+        displayProjects();
+    }
 
     function loadProject(e) {
         header.textContent = project.getProject(e.target.parentNode.dataset.index)
@@ -69,7 +77,9 @@ const UI = (() => {
     }
 
     function addProject() {
+        if(projectInput.value=="") return;
         project.addProject(projectInput.value);
+        projectInput.value = "";
         displayProjects();
 
     }
@@ -86,10 +96,10 @@ const UI = (() => {
             projectTitle.classList.add("projectTitle");
             projectTitle.textContent = element;
 
-            const deleteProjectBtn = document.createElement("input");
+            const deleteProjectBtn = document.createElement("span");
             deleteProjectBtn.classList.add("deleteProjectsBtn")
-            deleteProjectBtn.setAttribute("type", "button");
-            deleteProjectBtn.value = "Delete"
+            deleteProjectBtn.classList.add("material-icons-outlined")
+            deleteProjectBtn.textContent = "remove"
 
             eachProject.appendChild(projectTitle);
             eachProject.appendChild(deleteProjectBtn);
@@ -108,7 +118,7 @@ const UI = (() => {
     }
 
     function editTodo(e) {
-        const theTodo = todo.getTodo(+e.target.parentNode.dataset.index);
+        const theTodo = todo.getTodo(+e.target.parentNode.parentNode.dataset.index);
         curTodo = theTodo;
         openEditTodoForm();
 
@@ -211,22 +221,28 @@ const UI = (() => {
             todo.classList.add("todo")
 
             const todoText = document.createElement("p");
-            todoText.textContent = `Title: ${element.title} - Due: ${element.dueDate}`
+            todoText.textContent = `${element.title} - Due: ${element.dueDate}`
             todoText.classList.add("todoText")
 
-            const deleteBtn = document.createElement("input")
-            deleteBtn.setAttribute("type", "button")
-            deleteBtn.value = "Delete"
+            const deleteBtn = document.createElement("span")
+            deleteBtn.textContent = "clear"
             deleteBtn.classList.add("deleteBtn")
+            deleteBtn.classList.add("material-icons-outlined")
 
-            const editBtn = document.createElement("input")
-            editBtn.setAttribute("type", "button");
-            editBtn.value = "Edit"
+            const editBtn = document.createElement("span")
             editBtn.classList.add("editBtn")
+            editBtn.textContent = "edit"
+            editBtn.classList.add("material-icons-outlined")
+            
 
+            const editDeleteContainer = document.createElement("div")
+            editDeleteContainer.classList.add("editDeleteContainer")
+
+            editDeleteContainer.appendChild(deleteBtn)
+            editDeleteContainer.appendChild(editBtn)
             todo.appendChild(todoText)
-            todo.appendChild(deleteBtn)
-            todo.appendChild(editBtn)
+            todo.appendChild(editDeleteContainer)
+
             todoContainer.appendChild(todo)
         })
         // cache DOM

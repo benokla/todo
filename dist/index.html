@@ -6,63 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <div id="sidebar">
-        <p id="inbox">Inbox</p>
-        <p id="today">Today</p>
-        <p id="week">Week</p>
-    </div>
 
-    <div id="projectContainer">
-        <input type="text" id="projectInput">
-        <input type="button" value="Add project" id="newProjectBtn">
-        <div id="projects">
-            <!-- GENERATED PROJECTS -->
+    <header class=topbar>
+        <span class="material-icons-outlined headerLogo">
+            self_improvement
+        </span>
+        <h1 class="headerText">My Todo App</h1>
+    </header>
+
+    <div class="wrapper">
+        <div id="sidebar">
+            <p id="inbox">Inbox</p>
+            <p id="today">Today</p>
+            <p id="week">Week</p>
+
+            <div id="projectContainer">
+                <input type="text" id="projectsInput">
+                <input type="button" value="Add Project" id="newProjectBtn">
+                <div id="projects">
+                    <!-- GENERATED PROJECTS -->
+                </div>
+            </div>
+        </div>
+
+        <div id="main">
+
+            <h2 id="header">Inbox</h2>
+
+            <input type="button" value="Add Todo" id="openAddTodoFormBtn">
+
+            <div id="addTodoForm">
+                <label for="titleInput">Title: </label>
+                <input type="text" name="titleInput" id="titleInput">
+                <label for="descriptionInput">Description: </label>
+                <input type="text" name="descriptionInput" id="descriptionInput">
+
+                <label for="dueDateInput">Due Date: </label>
+                <input type="date" name="dueDateInput" id="dueDateInput">
+                <label for="priorityInput">Priority: </label>
+                <select id="priorityInput">
+                    <option value="low">low</option>
+                    <option value="medium">medium</option>
+                    <option value="high">high</option>
+                </select>
+                <label for="projectInput">Project: </label>
+                <input type="text" name="projectInput" id="projectInput">
+
+                <input type="button" value="Add" id="addTodoBtn">
+            </div>
+
+            <div id="editTodoForm">
+                <label for="editTitleInput">Title: </label>
+                <input type="text" name="editTitleInput" id="editTitleInput">
+                <label for="editDescriptionInput">Description: </label>
+                <input type="text" name="editDescriptionInput" id="editDescriptionInput">
+                <label for="editDueDateInput">Due Date: </label>
+                <input type="text" name="editDueDateInput" id="editDueDateInput">
+                <label for="editPriorityInput">Priority: </label>
+                <input type="text" name="editPriorityInput" id="editPriorityInput">
+                <label for="editProjectInput">Project: </label>
+                <input type="text" name="editProjectInput" id="editProjectInput">
+
+                <input type="button" value="Save" id="saveTodoBtn">
+            </div>
+
+            <div id="todoContainer">
+                <!-- GENEREATED TODOS -->
+            </div>
         </div>
     </div>
-
-    <div id="main">
-
-        <h2 id="header">Inbox</h2>
-
-        <input type="button" value="+ Add Todo" id="openAddTodoFormBtn">
-
-        <div id="addTodoForm">
-            <label for="titleInput">Title: </label>
-            <input type="text" name="titleInput" id="titleInput">
-            <label for="descriptionInput">Description: </label>
-            <input type="text" name="descriptionInput" id="descriptionInput">
-            <label for="dueDateInput">Due Date: </label>
-            <input type="text" name="dueDateInput" id="dueDateInput">
-            <label for="priorityInput">Priority: </label>
-            <input type="text" name="priorityInput" id="priorityInput">
-            <label for="projectInput">Project: </label>
-            <input type="text" name="projectInput" id="projectInput">
-
-            <input type="button" value="Add" id="addTodoBtn">
-        </div>
-
-        <div id="editTodoForm">
-            <label for="editTitleInput">Title: </label>
-            <input type="text" name="editTitleInput" id="editTitleInput">
-            <label for="editDescriptionInput">Description: </label>
-            <input type="text" name="editDescriptionInput" id="editDescriptionInput">
-            <label for="editDueDateInput">Due Date: </label>
-            <input type="text" name="editDueDateInput" id="editDueDateInput">
-            <label for="editPriorityInput">Priority: </label>
-            <input type="text" name="editPriorityInput" id="editPriorityInput">
-            <label for="editProjectInput">Project: </label>
-            <input type="text" name="editProjectInput" id="editProjectInput">
-
-            <input type="button" value="Save" id="saveTodoBtn">
-        </div>
-
-        <div id="todoContainer">
-            <!-- GENEREATED TODOS -->
-        </div>
-    </div>
-
     <script src="main.js"></script>
 </body>
 </html>

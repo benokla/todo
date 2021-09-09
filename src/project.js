@@ -14,7 +14,12 @@ const project = (() => {
         return projects[index]
     }
 
-    return {addProject, getProjects, getProject}
+    function deleteProject(element) {
+        let pos = projects.indexOf(element)
+        projects.splice(pos, 1);
+    }
+
+    return {addProject, getProjects, getProject, deleteProject}
 })();
 
 export { project }

@@ -1,23 +1,129 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.wrapper{
+    display: flex;
+}
+.active{
+    display: initial !important
+}
+/* HEADER */
+.topbar{
+    height: 80px;
+    background-color: rgb(255, 134, 134);
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin-bottom: 30px;
+}
+.headerLogo{
+    font-family: 'Material Icons';
+    font-style: normal;
+    color: white;
+    font-size: 60px;
+    margin: 0px 30px;
+}
+.headerText{
+    font-family: 'Roboto', sans-serif ;
+    color: white;
+    font-size: 40px;
+}
+/* SIDEBAR */
+#sidebar{
+    width: 380px;
+    height: 500px;
+    border-right: 1px solid rgba(209, 208, 208, 0.37);
+}
+#inbox, #week, #today {
+    margin-left: 40px;
+    margin-bottom: 10px;
+    font-family: "Roboto";
+    font-size: 28px;
+    cursor: pointer;
+}
+#projectContainer{
+    margin-top: 40px;
+    margin-left: 40px;
+}
+#projectsInput{
+    padding: 5px;
+}
+#newProjectBtn{
+    padding: 5px;
+}
+#projects{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.eachProject{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.deleteProjectsBtn{
+    font-family: 'Material Icons';
+    font-style: normal;
+    cursor: pointer;
+}
+.projectTitle{
+    cursor: pointer;
+    font-family: "Roboto";
+    font-size: 18px;
+}
+/* MAIN */
+#main{
+    margin-left: 50px;
+}
+#header{
+    font-family: "Roboto";
+    font-size: 28px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
 #editTodoForm{
     display: none;
+}
+.deleteBtn, .editBtn {
+    font-family: 'Material Icons';
+    font-style: normal;
+    cursor: pointer;
+    margin-right: 10px;
+}
+#priorityInput, #projectInput, #titleInput, #descriptionInput, #dueDateInput{
+    height: 30px;
+    padding: 5px;
+    width: 150px;
+}
+#addTodoBtn{
+    width: 50px;
+    height: 30px;
+    padding: 5px;
 }
 
 #addTodoForm{
     display: none;
+    font-family: "Roboto";
+    font-size: 20px;
 }
-
-.active{
-    display: initial !important
+#openAddTodoFormBtn{
+    padding: 5px;
+    margin-bottom: 30px;
+    display: block;
 }
-
 .todo{
+    font-family: "Roboto";
+    font-size: 20px;
     display: flex;
     align-items: center;
     width: 500px;
     justify-content: space-between;
+    margin-bottom: 20px;
+}
+#todoContainer{
+    margin-top: 30px;
 }
 
-.eachProject{
-    display: flex;
-    align-items: center;
-}
