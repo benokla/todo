@@ -35,7 +35,6 @@ const todo = (() => {
     function deleteTodo(index){
         let todoIds = todos.map((todo) => { return todo.id });
         let pos = todoIds.indexOf(index);
-        console.log(todoIds, pos, index)
         todos.splice(pos, 1);
     }
     return { getId, getTodos, addTodo, getTodo, deleteTodo }
