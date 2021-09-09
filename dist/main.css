@@ -13,6 +13,6 @@
 .todo{
     display: flex;
     align-items: center;
-    width: 1000px;
+    width: 500px;
     justify-content: space-between;
 }

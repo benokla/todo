@@ -3,6 +3,7 @@ import isToday from 'date-fns/isToday'
 import isThisWeek from 'date-fns/isThisWeek'
 
 const UI = (() => {
+    let curTodo;
     // cache DOM
     const openAddTodoFormBtn = document.querySelector("#openAddTodoFormBtn")
     const addTodoForm = document.querySelector("#addTodoForm")
@@ -13,12 +14,20 @@ const UI = (() => {
     const week = document.querySelector("#week")
     const header = document.querySelector("#header")
     const editTodoForm = document.querySelector("#editTodoForm")
+    const saveTodoBtn = document.querySelector("#saveTodoBtn")
+    // cache DOM Edit
+    const editTitle = document.querySelector("#editTitleInput");
+    const editDescription = document.querySelector("#editDescriptionInput");
+    const editDueDate = document.querySelector("#editDueDateInput");
+    const editPriority = document.querySelector("#editPriorityInput");
+    const editProject = document.querySelector("#editProjectInput");
 
     // bind events
     openAddTodoFormBtn.addEventListener("click", openAddTodoForm);
     inbox.addEventListener("click", loadInbox)
     today.addEventListener("click", loadToday)
     week.addEventListener("click", loadWeek)
+    saveTodoBtn.addEventListener("click", () => { saveTodo() })
     addTodoBtn.addEventListener("click", () => { 
         addTodo()
         closeAddTodoForm()
@@ -38,14 +47,16 @@ const UI = (() => {
 
     // functions 
 
+    function saveTodo() {
+        curTodo.updateTodo(editTitle.value, editDescription.value, editDueDate.value, editPriority.value, editProject.value);
+        showTodos(getHeader() )
+        closeEditTodoForm();
+    }
+
     function editTodo(e) {
         const theTodo = todo.getTodo(+e.target.parentNode.dataset.index);
+        curTodo = theTodo;
         openEditTodoForm();
-        const editTitle = document.querySelector("#editTitleInput");
-        const editDescription = document.querySelector("#editDescriptionInput");
-        const editDueDate = document.querySelector("#editDueDateInput");
-        const editPriority = document.querySelector("#editPriorityInput");
-        const editProject = document.querySelector("#editProjectInput");
 
         editTitle.value = theTodo.title;
         editDescription.value = theTodo.description;
@@ -56,6 +67,10 @@ const UI = (() => {
 
     function openEditTodoForm() {
         editTodoForm.classList.add("active")
+    }
+
+    function closeEditTodoForm() {
+        editTodoForm.classList.remove("active")
     }
 
     function deleteTodo(e, arg) {
@@ -158,8 +173,8 @@ const UI = (() => {
         todoEvent(arg);
     }
 
-    todo.addTodo("Title1", "Desc1", "2021-09-10", "medium", "project1", todo.getId())
-    todo.addTodo("Title1", "Desc1", "2021-01-01", "medium", "project1", todo.getId())
+    todo.addTodo("Rabbits", "I have to feed and pet my rabbits", "2021-09-10", "medium", "animals", todo.getId())
+    todo.addTodo("Learn JS", "Recall the OOP Principles", "2021-10-01", "medium", "programming", todo.getId())
     showTodos("inbox")
 })();
 

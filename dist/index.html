@@ -8,17 +8,25 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <input type="button" value="+ Add Todo" id="openAddTodoFormBtn">
-
     <div id="sidebar">
         <p id="inbox">Inbox</p>
         <p id="today">Today</p>
         <p id="week">Week</p>
     </div>
 
+    <div id="projectContainer">
+
+        <div id="projects">
+            <!-- GENERATED PROJECTS -->
+        </div>
+        <input type="button" value="+ New Project" id="newProjectBtn">
+    </div>
+
     <div id="main">
 
         <h2 id="header">Inbox</h2>
+
+        <input type="button" value="+ Add Todo" id="openAddTodoFormBtn">
 
         <div id="addTodoForm">
             <label for="titleInput">Title: </label>
@@ -47,7 +55,7 @@
             <label for="editProjectInput">Project: </label>
             <input type="text" name="editProjectInput" id="editProjectInput">
 
-            <input type="button" value="Save" id="editTodoBtn">
+            <input type="button" value="Save" id="saveTodoBtn">
         </div>
 
         <div id="todoContainer">

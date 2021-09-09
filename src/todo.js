@@ -11,6 +11,14 @@ const todo = (() => {
         this.priority = priority;
         this.project = project;
         this.id = id;
+        this.updateTodo = function(newTitle, newDescription, newDueDate, newPriority, newProject){
+            this.title = newTitle;
+            this.description = newDescription;
+            this.dueDate = newDueDate;
+            this.priority = newPriority;
+            this.project = newProject;
+            console.log(todos)
+        }
     }
 
     function addTodo(title, description, dueDate, priority, project, id) {
