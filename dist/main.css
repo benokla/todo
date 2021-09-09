@@ -16,3 +16,8 @@
     width: 500px;
     justify-content: space-between;
 }
+
+.eachProject{
+    display: flex;
+    align-items: center;
+}

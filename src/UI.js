@@ -1,6 +1,7 @@
 import { todo } from "./todo"
 import isToday from 'date-fns/isToday'
 import isThisWeek from 'date-fns/isThisWeek'
+import { project } from "./project";
 
 const UI = (() => {
     let curTodo;
@@ -15,6 +16,9 @@ const UI = (() => {
     const header = document.querySelector("#header")
     const editTodoForm = document.querySelector("#editTodoForm")
     const saveTodoBtn = document.querySelector("#saveTodoBtn")
+    const newProjectBtn = document.querySelector("#newProjectBtn")
+    const projectInput = document.querySelector("#projectInput")
+    const projects = document.querySelector("#projects")
     // cache DOM Edit
     const editTitle = document.querySelector("#editTitleInput");
     const editDescription = document.querySelector("#editDescriptionInput");
@@ -22,12 +26,17 @@ const UI = (() => {
     const editPriority = document.querySelector("#editPriorityInput");
     const editProject = document.querySelector("#editProjectInput");
 
+
     // bind events
     openAddTodoFormBtn.addEventListener("click", openAddTodoForm);
     inbox.addEventListener("click", loadInbox)
     today.addEventListener("click", loadToday)
     week.addEventListener("click", loadWeek)
     saveTodoBtn.addEventListener("click", () => { saveTodo() })
+    newProjectBtn.addEventListener("click", () => {
+        addProject();
+        displayProjects();
+    })
     addTodoBtn.addEventListener("click", () => { 
         addTodo()
         closeAddTodoForm()
@@ -44,8 +53,53 @@ const UI = (() => {
             editBtn.addEventListener("click", (e) => { editTodo(e) })
         })
     }
+    function projectEvent() {
+        const projectTitles = document.querySelectorAll(".projectTitle");
+        projectTitles.forEach(element => {
+            element.addEventListener("click", (e) => { loadProject(e) })
+        });
+        const deleteProjectsBtn = document.querySelectorAll("deleteProjectsBtn")
+    }
 
     // functions 
+
+    function loadProject(e) {
+        header.textContent = project.getProject(e.target.parentNode.dataset.index)
+        showTodos(project.getProject(e.target.parentNode.dataset.index))
+    }
+
+    function addProject() {
+        project.addProject(projectInput.value);
+        displayProjects();
+
+    }
+    function displayProjects() {
+        projects.innerHTML = "";
+
+        let projectArray = project.getProjects();
+        projectArray.forEach(element => {
+            const eachProject = document.createElement("div");
+            eachProject.classList.add("eachProject")
+            eachProject.dataset.index = projectArray.indexOf(element)
+
+            const projectTitle = document.createElement("p");
+            projectTitle.classList.add("projectTitle");
+            projectTitle.textContent = element;
+
+            const deleteProjectBtn = document.createElement("input");
+            deleteProjectBtn.classList.add("deleteProjectsBtn")
+            deleteProjectBtn.setAttribute("type", "button");
+            deleteProjectBtn.value = "Delete"
+
+            eachProject.appendChild(projectTitle);
+            eachProject.appendChild(deleteProjectBtn);
+            projects.appendChild(eachProject)
+
+        });
+        projectEvent();
+    }
+
+
 
     function saveTodo() {
         curTodo.updateTodo(editTitle.value, editDescription.value, editDueDate.value, editPriority.value, editProject.value);
@@ -134,6 +188,12 @@ const UI = (() => {
         todoContainer.innerHTML = "";
 
         let todos = todo.getTodos();
+
+        if(arg != "today" && arg != "inbox" && arg != "week") {
+            todos = todos.filter((todo) => {
+                if(todo.project == arg) return todo
+            })
+        }
 
         if(arg=="today"){
             todos = todos.filter((todo) => {
