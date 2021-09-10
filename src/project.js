@@ -1,9 +1,12 @@
+import { store } from "./store";
+
 const project = (() => {
     let projects = [];
 
     function addProject(newProject) {
         projects.push(newProject)
         console.log(projects)
+        store.save()
     }
 
     function getProjects() {
@@ -17,9 +20,14 @@ const project = (() => {
     function deleteProject(element) {
         let pos = projects.indexOf(element)
         projects.splice(pos, 1);
+        store.save()
     }
 
-    return {addProject, getProjects, getProject, deleteProject}
+    function setProjects(array) {
+        projects = array;
+    }
+
+    return {addProject, getProjects, getProject, deleteProject, setProjects}
 })();
 
 export { project }

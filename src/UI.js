@@ -2,6 +2,7 @@ import { todo } from "./todo"
 import isToday from 'date-fns/isToday'
 import isThisWeek from 'date-fns/isThisWeek'
 import { project } from "./project";
+import { store } from "./store";
 
 const UI = (() => {
     let curTodo;
@@ -112,9 +113,11 @@ const UI = (() => {
 
 
     function saveTodo() {
+        console.log(curTodo)
         curTodo.updateTodo(editTitle.value, editDescription.value, editDueDate.value, editPriority.value, editProject.value);
         showTodos(getHeader() )
         closeEditTodoForm();
+        store.save();
     }
 
     function editTodo(e) {
@@ -249,9 +252,7 @@ const UI = (() => {
         todoEvent(arg);
     }
 
-    todo.addTodo("Rabbits", "I have to feed and pet my rabbits", "2021-09-10", "medium", "animals", todo.getId())
-    todo.addTodo("Learn JS", "Recall the OOP Principles", "2021-10-01", "medium", "programming", todo.getId())
-    showTodos("inbox")
+    return  { showTodos , displayProjects}
 })();
 
 export { UI }
