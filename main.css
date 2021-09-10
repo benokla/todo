@@ -12,7 +12,7 @@
 /* HEADER */
 .topbar{
     height: 80px;
-    background-color: rgb(255, 134, 134);
+    background-color: rgb(218, 106, 106);
     display: flex;
     align-items: center;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
@@ -95,10 +95,14 @@
 }
 #priorityInput, #projectInput, #titleInput, #descriptionInput, #dueDateInput{
     height: 30px;
+    margin-bottom: 10px;
     padding: 5px;
-    width: 150px;
+    width: 200px;
 }
-#addTodoBtn{
+#descriptionInput{
+    height: 183px;
+}
+#addTodoBtn, #saveTodoBtn{
     width: 50px;
     height: 30px;
     padding: 5px;
@@ -108,6 +112,21 @@
     display: none;
     font-family: "Roboto";
     font-size: 20px;
+}
+.addTodoWrap{
+    display: flex;
+    width: 450px;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.addTodoLeft{
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+.addTodoRight{
+    display: flex;
+    flex-direction: column;
 }
 #openAddTodoFormBtn{
     padding: 5px;
@@ -126,4 +145,24 @@
 #todoContainer{
     margin-top: 30px;
 }
-
+/* EDIT */
+#editPriorityInput, #editProjectInput, #editTitleInput, #editDescriptionInput, #editDueDateInput{
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
+}
+.editTodoWrap{
+        display: flex;
+        width: 450px;
+        padding: 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        font-family: "Roboto";
+        font-size: 20px;
+}
+#editDescriptionInput{
+    height: 183px;
+}
+.editTodoLeft{
+    margin-right: 20px;
+}
